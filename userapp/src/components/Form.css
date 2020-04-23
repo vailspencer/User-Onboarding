@@ -1,0 +1,22 @@
+.form-section {
+    display:flex;
+    flex-direction:column;
+}
+
+.form-box{
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+}
+
+.field-Input{
+    justify-content: flex-start;
+    align-content: flex-start;
+    text-align: center;
+    padding:10px;
+    
+}
