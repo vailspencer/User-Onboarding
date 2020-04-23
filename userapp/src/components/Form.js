@@ -7,12 +7,18 @@ import axios from 'axios'
 import * as yup from 'yup';
 
 const formStructure = yup.object().shape({
-    name: yup.string().required('Name is required'),
+    name: yup
+        .string()
+        .min(3, 'Name must have 3 or more characters')
+        .required('Name is required'),
     email:yup
         .string()
         .email('Please provide a valid email')
         .required(' An email is required'),
-    password: yup.string().required('Password must be included'),
+    password: yup
+        .string()
+        .min(8, 'The password must have 8 or more characters')
+        .required('Password must be included'),
     terms: yup.boolean().oneOf([true], 'Please agree to terms')
 });
 
@@ -31,7 +37,7 @@ const Form = () => {
 
 // setting state for errors
     const [errors, setErrors] =useState({
-        name:'test',
+        name:' ',
         email:'',
         password:'',
         terms:''
@@ -99,21 +105,25 @@ return(
             <input type='text' name='name' placeholder='Name' value={formData.name} onChange={inputChange}  />
             Name:
         </label>
+
         {errors.name.length > 0 ? <p className="error">{errors.name}</p> : null}
         <label htmlFor="email" className='field-Input'>
             <input type='email' name='email' placeholder='Email' value={formData.email} onChange={inputChange} />
             Email:
         </label>
+
         {errors.email.length > 0 ? <p className="error">{errors.email}</p> : null}
         <label htmlFor="password" className='field-Input'>
             <input type='text' name='password' placeholder='Password' value={formData.password} onChange={inputChange} />
             Password:
         </label>
+
         {errors.password.length > 0 ? <p className="error">{errors.password}</p> : null}
         <label htmlFor="terms" className='field-Input'>
             <input type='checkbox' name = 'terms' checked={formData.terms} onChange={inputChange}/>
             Agree to Terms & Conditions:
         </label>
+        
         <pre> {JSON.stringify(post, null, 2)}</pre>
         <button disabled={buttonOff} type='submit'>
             Submit
